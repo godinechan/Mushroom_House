@@ -55,21 +55,7 @@ class Game:
         self.ask_for_name()              #inquire players for their names
         self.generate_pos()              #map position on the board with a grid
         self.print_board()               #print game board
-    
-    def ask_for_name(self):
-        """
-        Description: Inquire names from players.
-                     As a two-player game, define default players as
-                     Mario and Luigi.
-        """
-        default = ['Mario', 'Luigi']
-        for i in range(2):
-            self.players[i].player_num = i + 1
-            self.players[i].name = \
-                 input('Please input name for Player {} (Default is {}): ' \
-                          .format(self.players[i].player_num, default[i])) \
-                          or default[i]
-        
+
     def init_gamestate(self):
         """
         Description: Initializate game state as all cards being not flipped.
@@ -130,67 +116,19 @@ class Game:
         for count, key in enumerate(keys):
             self.card_position[key] = deck[count]
     
-    def update_gamestate_and_rewards(self, pos):
+    def ask_for_name(self):
         """
-        Description: Taking the position selected as input, update the
-                     game state as well as the rewards and penalties accrued.
-                     Also record the moves of the players.
-        Input:
-            pos, (tuple) : position selected on the board as (m, n)
+        Description: Inquire names from players.
+                     As a two-player game, define default players as
+                     Mario and Luigi.
         """
-        #update game state by flipping the card at the selected position
-        self.gamestate[pos] = True
-        #updated accumulated rewards
-        self.update_rewards(self.card_position[pos].word)
-        #updated accumulated penalties
-        self.update_penalties(self.card_position[pos].word)
-        #updated player records
-        self.update_record(self.card_position[pos].word)    
-            
-    def print_board(self):
-        """
-        Description: Print game board with ascii charaters to terminal.
-        """
-        indent = '  '
-        divider = indent + '+'
-        column_index = indent
-        for i in range(self.board.width):
-            divider += '========+'
-            column_index += '    ' + ascii_uppercase[i] + '    '
-        printable_board = []
-        printable_board.append(column_index)
-        printable_board.append(divider)
-        for i in range(self.board.height):
-            row = str(i) + ' |'
-            for j in range(self.board.width):
-                if self.gamestate[(i,j)]:
-                    display = self.card_position[(i,j)].word
-                else:
-                    display = 'pick me!'
-                row = row + display.ljust(8) + '|'
-            printable_board.append(row)
-            printable_board.append(divider)
-        for m in range(len(printable_board)):
-            print(printable_board[m])
-    
-    def find_current_player(self):
-        """Helper function to locate current player with player number."""
-        return self.players[self.current_player_num]
-            
-    def change_current_player(self):
-        """Helper function to flip current player number."""
-        if self.current_player_num == 0:
-            self.current_player_num = 1
-        elif self.current_player_num == 1:
-            self.current_player_num = 0
-    
-    def ascii_to_int(self, upper_ascii):
-        """Helper function to change ascii character (uppercase) to integer."""
-        return self.ascii_to_int_dict[upper_ascii]
-    
-    def int_to_ascii(self, input_int):
-        """Helper function to change integer to ascii character (uppercase)."""
-        return self.int_to_ascii_dict[input_int]
+        default = ['Mario', 'Luigi']
+        for i in range(2):
+            self.players[i].player_num = i + 1
+            self.players[i].name = \
+                 input('Please input name for Player {} (Default is {}): ' \
+                          .format(self.players[i].player_num, default[i])) \
+                          or default[i]
     
     def generate_pos(self):
         """
@@ -202,7 +140,7 @@ class Game:
             for j in range(self.board.width):
                 self.pos_dict[self.int_to_ascii(j) + str(i)] = (i, j)
         self.inv_pos_dict = {v: k for k, v in self.pos_dict.items()}
-        
+
     def ask_for_pick(self):
         """
         Description: Ask players for their pick of the card on the game board.
@@ -254,12 +192,48 @@ class Game:
                 else:
                     return (x,y) #return position of the selected card
 
+    def find_current_player(self):
+        """Helper function to locate current player with player number."""
+        return self.players[self.current_player_num]
+            
+    def change_current_player(self):
+        """Helper function to flip current player number."""
+        if self.current_player_num == 0:
+            self.current_player_num = 1
+        elif self.current_player_num == 1:
+            self.current_player_num = 0
+    
+    def ascii_to_int(self, upper_ascii):
+        """Helper function to change ascii character (uppercase) to integer."""
+        return self.ascii_to_int_dict[upper_ascii]
+    
+    def int_to_ascii(self, input_int):
+        """Helper function to change integer to ascii character (uppercase)."""
+        return self.int_to_ascii_dict[input_int]
+
     def display_pick(self, pick):
         """Helper function to print the selection and result of the player."""
         print('{} picked {}, it revealed the card [{}]' \
               .format(self.find_current_player().name, \
                       self.inv_pos_dict[pick], self.card_position[pick].word))
-            
+    
+    def update_gamestate_and_rewards(self, pos):
+        """
+        Description: Taking the position selected as input, update the
+                     game state as well as the rewards and penalties accrued.
+                     Also record the moves of the players.
+        Input:
+            pos, (tuple) : position selected on the board as (m, n)
+        """
+        #update game state by flipping the card at the selected position
+        self.gamestate[pos] = True
+        #updated accumulated rewards
+        self.update_rewards(self.card_position[pos].word)
+        #updated accumulated penalties
+        self.update_penalties(self.card_position[pos].word)
+        #updated player records
+        self.update_record(self.card_position[pos].word)    
+        
     def update_rewards(self, word):
         """
         Description: Update the count of rewards according the card revealed
@@ -314,7 +288,33 @@ class Game:
         print('* - Type "exit" anytime to quit the game.               *')
         print('* - Revisit the rules anytime by typing "rules".        *')
         print('*********************************************************')
-        
+
+    def print_board(self):
+        """
+        Description: Print game board with ascii charaters to terminal.
+        """
+        indent = '  '
+        divider = indent + '+'
+        column_index = indent
+        for i in range(self.board.width):
+            divider += '========+'
+            column_index += '    ' + ascii_uppercase[i] + '    '
+        printable_board = []
+        printable_board.append(column_index)
+        printable_board.append(divider)
+        for i in range(self.board.height):
+            row = str(i) + ' |'
+            for j in range(self.board.width):
+                if self.gamestate[(i,j)]:
+                    display = self.card_position[(i,j)].word
+                else:
+                    display = 'pick me!'
+                row = row + display.ljust(8) + '|'
+            printable_board.append(row)
+            printable_board.append(divider)
+        for m in range(len(printable_board)):
+            print(printable_board[m])
+
     def print_current_count(self):
         """Helper function to print the current accured cards in the game."""
         print('Current card counts are:')
