@@ -3,7 +3,8 @@
 """
 class Board:
     """
-    Description: The Board class stores attributes such as the height, width, size and slots of the board.
+    Description: The Board class stores attributes such as the height, width, 
+                 size and slots of the board.
     """
     def __init__(self, height, width):
         self.height = height

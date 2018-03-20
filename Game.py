@@ -230,6 +230,12 @@ class Game:
                 elif player_input == "rules":
                     self.print_rules() #Print game rules
                     continue
+                elif player_input == "board":
+                    self.print_board() #Print game board
+                    continue
+                elif player_input == "count":
+                    self.print_current_count() #Print card count
+                    continue
                 #Ask for input again if out of bounds
                 if player_input not in self.pos_dict.keys(): 
                     print("Oops! Please enter a value between {} and {}."\
@@ -286,14 +292,28 @@ class Game:
         
     def print_welcome(self):
         """Helper function to print the welcome message of the game."""
-        print('Welcome to the Mushroom House!')
+        print('/////////////Welcome to the Mushroom House!\\\\\\\\\\\\\\\\\\\\\
+\\\\\\\\')
         self.print_rules()
         
     def print_rules(self):
         """Helper function to print the rules of the game."""
-        print('Game Rules:')
-        print('Game Rules')
-        print('Game Rules')
+        print('*********************************************************')
+        print('* Game Rules:                                           *')
+        print('* This is a team game in which two players - Mario and  *')
+        print('* Luigi, take turns picking cards from the game board   *')
+        print('* in order to collect powerups from the mushroom house. *')
+        print('* The card will stays in the players\' collection once   *')
+        print('* they are revealed. Collect a pair of powerups to earn *')
+        print('* them as rewards. However, beware of Bowser and        *')
+        print('* Bowser Jr.! The game ends when a pair of Bowser or    *')
+        print('* Bowser Jr. cards are revealed!                        *')
+        print('* - Type in the position on the grid to flip a card.    *')
+        print('* - Type "board" to print the game board.               *')
+        print('* - Type "count" to display current card count.         *')
+        print('* - Type "exit" anytime to quit the game.               *')
+        print('* - Revisit the rules anytime by typing "rules".        *')
+        print('*********************************************************')
         
     def print_current_count(self):
         """Helper function to print the current accured cards in the game."""

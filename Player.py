@@ -3,8 +3,9 @@
 """
 class Player:
     """
-    Description: The Player class stores attributes such as the name of the player, the player number and
-                 record the card selections of the players throughout the game.
+    Description: The Player class stores attributes such as the name of the
+                 player, the player number and record the card selections of
+                 the players throughout the game.
     """
     def __init__(self):
         self.name = None      #Player name
