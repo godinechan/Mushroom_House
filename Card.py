@@ -1,14 +1,15 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Tue Mar 20 00:12:25 2018
-
 @author: godinechan
 """
-
 class Card:
     """
+    Description: The Card class stores attributes such as the word on the card and its status as flipped/not flipped.
     """
     def __init__(self, word):
-        self.word = word
-        self.flip = False
+        """
+        Description: Constructor for the card which define the contents(word) and flip status
+        Input:
+            word, (string) : the content on the face of the card
+        """
+        self.word = word   #words are taken as strings for the card
+        self.flip = False  #the cards are defaulted to be not flipped

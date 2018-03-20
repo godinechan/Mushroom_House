@@ -1,26 +1,27 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Tue Mar 20 00:08:46 2018
-
+Description: Main program for the Mushroom House minigame
 @author: godinechan
 """
 from Game import Game
 
 def main():
-    mygame = Game()
-    mygame.init_game()
-    while (mygame.bowser_count < mygame.dead_by_bowser
-          and mygame.bowserjr_count < mygame.dead_by_bowserjr
-          and not mygame.exit):
-        pick = mygame.ask_for_pick()
+    """
+    Description: Main program in running the Mushroom House minigame
+    """
+    mygame = Game()    #Create game
+    mygame.init_game() #Initialize game
+    #Continue the game until reaching conditions to end game or exiting
+    while (    mygame.bowser_count   < mygame.PAIR
+           and mygame.bowserjr_count < mygame.PAIR
+           and not mygame.exit):
+        pick = mygame.ask_for_pick()       #ask player to pick a card
         if not mygame.exit:
-            mygame.display_pick(pick)
-            mygame.change_current_player()
-            mygame.update_gamestate_and_rewards(pick)
-            mygame.print_board()
-            mygame.print_current_count()
-    mygame.print_results()
+            mygame.display_pick(pick)      #display the pick and the result
+            mygame.update_gamestate_and_rewards(pick) #perform updates in game
+            mygame.print_board()           #print game board on terminal
+            mygame.print_current_count()   #print current card counts
+            mygame.change_current_player() #switch players
+    mygame.print_results()                 #print results at the end
     
 if __name__ == '__main__':
     main()

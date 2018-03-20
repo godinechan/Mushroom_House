@@ -1,11 +1,12 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Tue Mar 20 00:12:53 2018
-
 @author: godinechan
 """
 class Player:
+    """
+    Description: The Player class stores attributes such as the name of the player, the player number and
+                 record the card selections of the players throughout the game.
+    """
     def __init__(self):
-        self.name = None
-        self.turn = False
+        self.name = None      #Player name
+        self.player_num = 0   #Player number
+        self.record = []      #Record of the player's card selection
