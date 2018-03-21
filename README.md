@@ -1,4 +1,7 @@
-# Mushroom_House
+# Mushroom House Minigame
+
+created by Godine Chan
+
 Mushroom house minigame according to Super Mario Bros Wii.
 See Mushroom_house.ipynb for the code and an example run.
 Description on IGN: http://www.ign.com/wikis/new-super-mario-bros-wii/Mushroom_Houses.
