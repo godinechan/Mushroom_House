@@ -3,7 +3,7 @@
 created by Godine Chan
 
 Mushroom house minigame according to Super Mario Bros Wii.  
-See Mushroom_house.ipynb for the code and an example run.
+See Mushroom_house.ipynb for the code and an example run.  
 Download the mushroom_house directory and run "python mushroom_house" on terminal to play on your system.
 
 Game rules are as follow:  
